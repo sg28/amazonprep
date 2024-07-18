@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './tictactoe.css';
 
 const TikTakToe = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [board, setBoard] = useState(new Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [boardSize, setBoardSize] = useState(new Array(9).fill(null));
 

@@ -15,11 +15,11 @@ const App = () => {
       {/* <TikTakToe /> */}
       {/* <IamgeSlider /> */}
       {/* <TableForm />  */}
-      {/* <Calculator /> */}
+      <Calculator />
       {/* <Carousel /> */}
       {/* < EventBasic /> */}
       {/* <FlashCard /> */}
-      <CommentsList />
+      {/* <CommentsList /> */}
     </div>
   );
 };

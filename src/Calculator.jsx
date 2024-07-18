@@ -4,6 +4,8 @@ function Calculator() {
   const [currentInput, setCurrentInput] = useState('');
   const [operator, setOperator] = useState(null);
   const [previousInput, setPreviousInput] = useState('');
+  const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  const operations = ['+', '-', '*', '/'];
 
   const handleDigit = (digit) => {
     setCurrentInput(currentInput => currentInput + digit);
@@ -50,20 +52,16 @@ function Calculator() {
   return (
     <div className="calculator">
       <div className="display">{currentInput || '0'}</div>
-      <button onClick={() => handleDigit('1')}>1</button>
-      <button onClick={() => handleDigit('2')}>2</button>
-      <button onClick={() => handleDigit('3')}>3</button>
-      <button onClick={() => handleDigit('4')}>4</button>
-      <button onClick={() => handleDigit('5')}>5</button>
-      <button onClick={() => handleDigit('6')}>6</button>
-      <button onClick={() => handleDigit('7')}>7</button>
-      <button onClick={() => handleDigit('8')}>8</button>
-      <button onClick={() => handleDigit('9')}>9</button>
-      <button onClick={() => handleDigit('0')}>0</button>
-      <button onClick={() => handleOperation('+')}>+</button>
-      <button onClick={() => handleOperation('-')}>-</button>
-      <button onClick={() => handleOperation('*')}>*</button>
-      <button onClick={() => handleOperation('/')}>/</button>
+      {digits.map(digit => (
+        <button key={digit} onClick={() => handleDigit(digit.toString())}>
+          {digit}
+        </button>
+      ))}
+      {operations.map(op => (
+        <button key={op} onClick={() => handleOperation(op)}>
+          {op}
+        </button>
+      ))}
       <button onClick={calculate}>=</button>
       <button onClick={clearAll}>C</button>
       <style>{`
