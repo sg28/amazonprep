@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-
-function App() {
+import './ImageSlider';
+import IamgeSlider from './ImageSlider';
+import TikTakToe from './TicTackToe';
+import TableForm from './TableForm';
+import Calculator from './Calculator';
+import Carousel from './Carousel';
+import FlashCard from './FlashCard';
+import EventBasic from './ReactEventHandling/EventHandle_Basic'
+import CommentsList from './Comment'
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="game">
+      {/* <TikTakToe /> */}
+      {/* <IamgeSlider /> */}
+      {/* <TableForm />  */}
+      {/* <Calculator /> */}
+      {/* <Carousel /> */}
+      {/* < EventBasic /> */}
+      {/* <FlashCard /> */}
+      <CommentsList />
     </div>
   );
-}
+};
 
 export default App;
