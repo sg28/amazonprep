@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Books</title>
+    <style>
+        .w-50, .mx-auto, .mt-40, .position-relative {
+            width: 50%;
+            margin-top: 40px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+        .accordion-title {
+            text-align: center;
+            font-size: 24px;
+        }
+        .title-section {
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-top: 1px solid #ccc;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title-section:first-child {
+            border-top: none;
+        }
+        .description {
+            padding: 10px;
+            display: none;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+        }
+        .expanded {
+            display: block;
+        }
+        .expand-icon, .collapse-icon {
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            display: none;
+        }
+        .collapse-icon {
+            background-image: url('https://via.placeholder.com/20/000000/FFFFFF/?text=-');
+            display: inline;
+        }
+        .expand-icon {
+            background-image: url('https://via.placeholder.com/20/000000/FFFFFF/?text=+');
+        }
+    </style>
+</head>
+<body>
+<main class="w-50 mx-auto mt-40 position-relative">
+    <h1 class="accordion-title">Amazon Book Titles</h1>
+    <div class="accordion-container">
+        <div class="accordion" id="accordion1">
+            <div class="title-section" onclick="toggleAccordion(1)">
+                <div class="title">Responsive Web Design with HTML5 and CSS</div>
+                <div class="expand-icon"></div>
+                <div class="collapse-icon"></div>
+            </div>
+            <div class="description">
+                Harness the latest capabilities of HTML5 and CSS to create a single UI that works flawlessly on mobile phones, tablets, and desktops ...
+            </div>
+        </div>
+        <div class="accordion" id="accordion2">
+            <div class="title-section" onclick="toggleAccordion(2)">
+                <div class="title">Front End Development A Complete Guide</div>
+                <div class="expand-icon"></div>
+                <div class="collapse-icon"></div>
+            </div>
+            <div class="description">
+                Would you develop a Front End Development Communication Strategy? Which models, tools and techniques are necessary? How do you measure improved Front End Development service perception ...
+            </div>
+        </div>
+        <!-- Add more accordions as needed -->
+    </div>
+    <div class="multi-select">
+        <label>
+            <input type="checkbox" class="checkbox" id="multiselect"> Multiple
+        </label>
+    </div>
+</main>
+
+<script>
+    document.getElementById("accordion1").querySelector(".description").style.display = "block"; // Set first item expanded by default
+    function toggleAccordion(id) {
+        var accordion = document.getElementById("accordion" + id);
+        var description = accordion.querySelector(".description");
+        var isExpanded = description.style.display === "block";
+        var multiselect = document.getElementById("multiselect").checked;
+
+        if (!multiselect) {
+            // Collapse all first
+            document.querySelectorAll(".description").forEach(function(desc) {
+                desc.style.display = "none";
+                desc.previousElementSibling.querySelector(".expand-icon").style.display = "inline";
+                desc.previousElementSibling.querySelector(".collapse-icon").style.display = "none";
+            });
+        }
+
+        // Toggle the clicked accordion
+        if (isExpanded) {
+            description.style.display = "none";
+            accordion.querySelector(".expand-icon").style.display = "inline";
+            accordion.querySelector(".collapse-icon").style.display = "none";
+        } else {
+            description.style.display = "block";
+            accordion.querySelector(".expand-icon").style.display = "none";
+            accordion.querySelector(".collapse-icon").style.display = "inline";
+        }
+    }
+</script>
+</body>
+</html>

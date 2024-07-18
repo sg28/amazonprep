@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Phone Directory</title>
+    <style>
+        .margin20 { margin: 20px; }
+        .textCenter { text-align: center; }
+        .fs20 { font-size: 20px; }
+        .inputContent { margin: auto; width: 50%; }
+        .txtLeft { text-align: left; }
+        .marginTB40 { margin-top: 40px; margin-bottom: 40px; }
+        .fb { font-weight: bold; }
+        .btn { padding: 10px; margin-top: 10px; cursor: pointer; }
+        .dn { display: none; }
+        .error { color: red; }
+        .padT10 { padding-top: 10px; }
+        .marginT40 { margin-top: 40px; }
+        .padL10 { padding-left: 10px; }
+        .tab { display: table; }
+        .cursorPtr { cursor: pointer; }
+        .contactSummary { margin-top: 20px; }
+        .noResult { color: red; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1 class="margin20 textCenter fs20">Phone Directory</h1>
+    <div class="textCenter">
+        <div class="inputContent">
+            <div class="txtLeft marginTB40 fb">
+                <form class="txtLeft" onSubmit="event.preventDefault(); addContact();">
+                    <input type="text" id="name" placeholder="Contact Name" aria-label="Contact Name">
+                    <input type="text" id="mobile" placeholder="Mobile Number" aria-label="Mobile Number" maxlength="10">
+                    <input type="email" id="email" placeholder="Email" aria-label="Email">
+                    <input type="submit" class="btn" value="Add Contact">
+                    <div id="error" class="dn error padT10 textCenter">Invalid Input!</div>
+                </form>
+            </div>
+        </div>
+
+        <div class="marginT40 padL10 tab cursorPtr" id="contactsSummary">Contacts Summary</div>
+        <div id="contactSummary" class="contactSummary">
+            <table aria-labelledby="contactsSummary" id="summaryTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic Rows Will Be Added Here -->
+                </tbody>
+            </table>
+            <div id="noResult" class="dn noResult">No Results Found</div>
+        </div>
+    </div>
+</main>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const nameInput = document.getElementById('name');
+    const mobileInput = document.getElementById('mobile');
+    const emailInput = document.getElementById('email');
+    const errorDiv = document.getElementById('error');
+    const contactsTable = document.getElementById('summaryTable').getElementsByTagName('tbody')[0];
+
+
+    nameInput.addEventListener('input', function() {
+        console.log(" checking name ", nameInput.value)
+        // if (!isValidName(nameInput.value)) {
+        //     showError("Names must contain only letters and spaces, and be up to 20 characters long.");
+        // } else {
+        //     hideError();
+        // }
+    });
+
+    window.addContact = function() {
+        const name = nameInput.value.trim();
+        const mobile = mobileInput.value.trim();
+        const email = emailInput.value.trim();
+
+        if (!isValidName(name) || !isValidMobile(mobile) || !isValidEmail(email)) {
+            showError("Invalid Input! Please check the fields.");
+            return;
+        }
+
+        const newRow = contactsTable.insertRow();
+        newRow.insertCell(0).textContent = name;
+        newRow.insertCell(1).textContent = mobile;
+        newRow.insertCell(2).textContent = email;
+
+        nameInput.value = '';
+        mobileInput.value = '';
+        emailInput.value = '';
+        errorDiv.classList.add('dn');
+    };
+
+    function isValidName(name) {
+        return /^[A-Za-z\s]{1,20}$/.test(name);
+    }
+
+    function isValidMobile(mobile) {
+        return /^\d{10}$/.test(mobile);
+    }
+
+    function isValidEmail(email) {
+        return /^[A-Za-z][A-Za-z0-9\.]{1,8}@[A-Za-z]{2,20}\.[A-Za-z]{2,10}$/.test(email);
+    }
+
+    function showError(message) {
+        errorDiv.textContent = message;
+        errorDiv.classList.remove('dn');
+    }
+});
+</script>
+</body>
+</html>

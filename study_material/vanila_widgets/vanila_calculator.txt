@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body, html {
+            height: 100%; /* Ensure full height to facilitate centering */
+            margin: 0; /* Remove default margin */
+            display: flex; /* Establish flex context for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            background: #f0f0f0; /* Optional background color */
+        }
+        
+        .calculator {
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: inline-block; /* Maintain block level but allow text-align to affect inner content */
+            text-align: center; /* Center the text/buttons within the calculator */
+        }
+        
+        .display {
+            border: 1px solid #ddd;
+            padding: 10px;
+            min-height: 20px;
+            margin-bottom: 10px;
+            text-align: right; /* Right-align the numbers in the display */
+            background: #fff; /* Background for contrast */
+        }
+        
+        button {
+            padding: 5px;
+            width: 20%;
+            margin: 2px;
+            cursor: pointer; /* Cursor indicates button */
+            font-size: 16px; /* Larger text for readability */
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <button onclick="handleDigit('1')">1</button>
+        <button onclick="handleDigit('2')">2</button>
+        <button onclick="handleDigit('3')">3</button>
+        <button onclick="handleDigit('4')">4</button>
+        <button onclick="handleDigit('5')">5</button>
+        <button onclick="handleDigit('6')">6</button>
+        <button onclick="handleDigit('7')">7</button>
+        <button onclick="handleDigit('8')">8</button>
+        <button onclick="handleDigit('9')">9</button>
+        <button onclick="handleDigit('0')">0</button>
+        <button onclick="handleOperation('+')">+</button>
+        <button onclick="handleOperation('-')">-</button>
+        <button onclick="handleOperation('*')">*</button>
+        <button onclick="handleOperation('/')">/</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="clearAll()">C</button>
+    </div>
+
+    <script>
+        let currentInput = '';
+        let operator = null;
+        let previousInput = '';
+
+        function handleDigit(digit) {
+            currentInput += digit;
+            updateDisplay(currentInput);
+        }
+
+        function handleOperation(op) {
+            if (currentInput === '' && op === '-') {
+                currentInput = '-';
+                updateDisplay(currentInput);
+                return;
+            }
+            operator = op;
+            previousInput = currentInput;
+            currentInput = '';
+        }
+
+        function calculate() {
+            if (!operator || previousInput === '' || currentInput === '') return;
+            const numPrev = parseFloat(previousInput);
+            const numCurrent = parseFloat(currentInput);
+            let result = 0;
+            switch (operator) {
+                case '+':
+                    result = numPrev + numCurrent;
+                    break;
+                case '-':
+                    result = numPrev - numCurrent;
+                    break;
+                case '*':
+                    result = numPrev * numCurrent;
+                    break;
+                case '/':
+                    result = numPrev / numCurrent;
+                    break;
+                default:
+                    return;
+            }
+            currentInput = result.toString();
+            operator = null;
+            previousInput = '';
+            updateDisplay(currentInput);
+        }
+
+        function clearAll() {
+            currentInput = '';
+            previousInput = '';
+            operator = null;
+            updateDisplay('0');
+        }
+
+        function updateDisplay(value) {
+            const display = document.getElementById('display');
+            display.textContent = value;
+        }
+    </script>
+</body>
+</html>

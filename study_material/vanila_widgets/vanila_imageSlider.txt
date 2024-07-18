@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        .slider {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .slider-button {
+            cursor: pointer;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        .slider-image {
+            width: 600px; /* You can adjust this depending on your layout */
+            height: 400px; /* You can adjust this depending on your layout */
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <button onclick="prevPhoto()" class="slider-button">Previous</button>
+        <img src="https://via.placeholder.com/600/92c952" alt="slider" class="slider-image" id="sliderImage">
+        <button onclick="nextPhoto()" class="slider-button">Next</button>
+    </div>
+
+    <script>
+        const photos = [
+            'https://via.placeholder.com/600/92c952',
+            'https://via.placeholder.com/600/771796',
+            'https://via.placeholder.com/600/24f355',
+            'https://via.placeholder.com/600/d32776',
+            'https://via.placeholder.com/600/f66b97'
+        ];
+        let currentIndex = 0;
+
+        function nextPhoto() {
+            currentIndex = (currentIndex + 1) % photos.length;
+            updateImage();
+        }
+
+        function prevPhoto() {
+            currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+            updateImage();
+        }
+
+        function updateImage() {
+            const sliderImage = document.getElementById('sliderImage');
+            sliderImage.src = photos[currentIndex];
+        }
+    </script>
+</body>
+</html>
