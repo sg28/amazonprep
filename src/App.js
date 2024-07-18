@@ -16,10 +16,10 @@ const App = () => {
       {/* <IamgeSlider /> */}
       {/* <TableForm />  */}
       {/* <Calculator /> */}
-      <Carousel />
+      {/* <Carousel /> */}
       {/* < EventBasic /> */}
       {/* <FlashCard /> */}
-      {/* <CommentsList /> */}
+      <CommentsList />
     </div>
   );
 };
