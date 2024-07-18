@@ -16,16 +16,28 @@ function Carousel() {
     const [allowMultiple, setAllowMultiple] = useState(false);
 
     const toggleSection = index => {
+        // Handle the case where multiple sections can be open simultaneously
         if (allowMultiple) {
-            setOpenSections(prev =>
-                prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
-            );
+            setOpenSections(prev => {
+                // Check if the section is already open
+                const isSectionOpen = prev.includes(index);
+                if (isSectionOpen) {
+                    // If open, close it by filtering it out
+                    return prev.filter(i => i !== index);
+                } else {
+                    // If not open, add it to the list of open sections
+                    return [...prev, index];
+                }
+            });
         } else {
-            setOpenSections(prev =>
-                prev.includes(index) ? [] : [index]
-            );
+            // Handle the case where only one section can be open at a time
+            setOpenSections(prev => {
+                // Toggle the section: if it's open, close it; if it's closed, open it as the only open section
+                return prev.includes(index) ? [] : [index];
+            });
         }
     };
+    
 
     return (
         <main style={{ width: '50%', margin: '40px auto', position: 'relative' }}>
@@ -64,5 +76,8 @@ function Carousel() {
         </main>
     );
 }
+
+
+
 
 export default Carousel;

@@ -15,8 +15,8 @@ const App = () => {
       {/* <TikTakToe /> */}
       {/* <IamgeSlider /> */}
       {/* <TableForm />  */}
-      <Calculator />
-      {/* <Carousel /> */}
+      {/* <Calculator /> */}
+      <Carousel />
       {/* < EventBasic /> */}
       {/* <FlashCard /> */}
       {/* <CommentsList /> */}
